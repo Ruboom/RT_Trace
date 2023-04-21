@@ -9,7 +9,7 @@ LIBPATH = []
 
 if GetDepend('PKG_USING_RT_TRACE'):
     src += ['src/rt_trace_set_hook.c']
-    CPPPATH += ['lib/include']
+    CPPPATH += [GetCurrentDir() + '/lib/include']
     LIBS             = ['rttrace_gcc'] 
     LIBPATH          = [GetCurrentDir() + '/lib'] 
 
