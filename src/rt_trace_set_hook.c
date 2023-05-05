@@ -14,6 +14,8 @@
 
 extern rt_uint32_t (*rt_trace_timestamp)(void);
 
+extern struct rt_trace_ctf trace_ctf;
+
 #ifdef TRACE_LISTEN_SCHEDULE
 static void rt_scheduler_hook(struct rt_thread *from, struct rt_thread *to)
 {
@@ -153,6 +155,20 @@ int ctf_init(void)
 #ifdef CTF_USE_TIMESTAMP
     _rt_trace_timestamp_set(rt_trace_get_time);
 #endif /* CTF_USE_TIMESTAMP */
+
+    trace_ctf.buffer1 = (rt_uint8_t *)rt_malloc(TRACE_PACKET_SIZE);
+    if (trace_ctf.buffer1 == RT_NULL)
+    {
+        rt_kprintf("no memory\n");
+        return -1;
+    }
+    trace_ctf.buffer2 = (rt_uint8_t *)rt_malloc(TRACE_PACKET_SIZE);
+    if (trace_ctf.buffer2 == RT_NULL)
+    {
+        rt_kprintf("no memory\n");
+        return -1;
+    }
+    trace_ctf.buffer_align_size = RT_ALIGN_DOWN(TRACE_PACKET_SIZE, RT_ALIGN_SIZE);
 
     return 0;
 }

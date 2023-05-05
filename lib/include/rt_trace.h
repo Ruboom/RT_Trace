@@ -22,6 +22,20 @@ typedef struct
     char buf[RT_NAME_MAX];
 } ctf_bounded_string_t;
 
+struct rt_trace_ctf
+{
+    rt_uint8_t *buffer1;
+    rt_uint8_t *buffer2;
+    rt_uint8_t *buffer1_ptr;
+    rt_uint8_t *buffer2_ptr;
+    rt_uint32_t buffer1_offset;
+    rt_uint32_t buffer2_offset;
+    rt_uint8_t trace_state;
+    rt_uint8_t old_trace_state;
+    rt_uint8_t buffer_state;
+    rt_uint32_t buffer_align_size;
+};
+
 int rt_hw_jlink_rtt_init(void);
 
 void ctf_event_thread_switch_out(rt_uint8_t pri, ctf_bounded_string_t name);
