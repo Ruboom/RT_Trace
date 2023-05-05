@@ -11,15 +11,9 @@ if PKG_USING_RT_TRACE
         string
         default "/packages/tools/RT_Trace"
 
-    config CTF_USE_TIMESTAMP
-        bool "Trace use timestamp"
-        default n
-    
-    if CTF_USE_TIMESTAMP
-        config FREQUENCY_OF_TIMESTAMP
-            int "Frequency of timestamp"
-            default 480000000
-    endif
+    config FREQUENCY_OF_TIMESTAMP
+        int "Frequency of timestamp"
+        default 480000000
 
     config TRACE_PACKET_SIZE
         int "TRACE_PACKET_SIZE"

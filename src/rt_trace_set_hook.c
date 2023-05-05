@@ -124,7 +124,6 @@ static void rt_object_put_hook(struct rt_object *object)
 }
 #endif /* TRACE_LISTEN_IPC */
 
-#ifdef CTF_USE_TIMESTAMP
 static void _rt_trace_timestamp_set(rt_uint32_t (*timestamp)(void))
 {
     rt_trace_timestamp = timestamp;
@@ -134,7 +133,6 @@ RT_WEAK rt_uint32_t rt_trace_get_time(void)
 {
     return 0;
 }
-#endif /* CTF_USE_TIMESTAMP */
 
 int ctf_init(void)
 {
@@ -152,9 +150,7 @@ int ctf_init(void)
     rt_object_put_sethook(rt_object_put_hook);
 #endif /* TRACE_LISTEN_IPC */
 
-#ifdef CTF_USE_TIMESTAMP
     _rt_trace_timestamp_set(rt_trace_get_time);
-#endif /* CTF_USE_TIMESTAMP */
 
     trace_ctf.buffer1 = (rt_uint8_t *)rt_malloc(TRACE_PACKET_SIZE);
     if (trace_ctf.buffer1 == RT_NULL)
